@@ -17,6 +17,9 @@ gpg --keyserver hkp://keys.gnupg.net --recv-keys 409B6B1796C275462A1703113804BB8
 curl -sSL https://get.rvm.io | bash -s stable --ruby --gems=rails,unicorn
 source ~/.profile
 
+#set nginx conf
+sudo cp /opt/config/nginx.conf /etc/nginx/conf.d/default.conf
+
 #setup dirs for rails App
 sudo mkdir -p /opt/app
 sudo chown vagrant:vagrant /opt/app
@@ -24,7 +27,10 @@ sudo chown vagrant:vagrant /opt/app
 #clone the git repo to run latest version of App
 git clone https://github.com/railstutorial/sample_app.git /opt/app
 
+#set unicorn conf
+sudo cp /opt/config/unicorn.rb /opt/app/config/
+
 #setup rails app
 mv /opt/app/Gemfile.lock /opt/app/Gemfile.lock.old
-cd /opt/app && bundle install
-cd /opt/app && rails s >> /tmp/railsapp.log
+cd /opt/app && bundle install && gem install unicorn
+cd /opt/app && unicorn_rails -c config/unicorn.rb -D

@@ -1,1 +1,1 @@
-This is a complete environment with ruby on rails, passenger, nginx.
+This is a complete environment with ruby on rails, unicorn, nginx.

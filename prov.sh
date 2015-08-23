@@ -55,7 +55,7 @@ sudo easy_install supervisor
 sudo cp /opt/config/supervisord.conf /etc/
 
 #create log dir
-mkdir -p /var/log/supervisor
+sudo mkdir -p /var/log/supervisor
 
 #put init script in place
 sudo cp /opt/config/supervisord.init /etc/init.d/supervisord

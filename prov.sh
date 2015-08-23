@@ -63,7 +63,7 @@ sudo cp /opt/config/supervisord.init /etc/init.d/supervisord
 sudo chmod +x /etc/init.d/supervisord
 
 #start supervisord and make sure supervisord and nginx start at boot
-sudo service supervisord start
+sudo service supervisord restart
 sudo chkconfig supervisord on
 sudo chkconfig nginx on
 

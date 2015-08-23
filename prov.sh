@@ -21,8 +21,6 @@ source ~/.profile
 rvm install 1.9.3
 rvm use 1.9.3 --default
 
-#create wrapper for supervisord script
-rvm alias create sample_app ruby-1.9.3-p551@sample_app
 
 #set nginx conf
 sudo cp /opt/config/default.conf /etc/nginx/conf.d/default.conf
@@ -30,11 +28,14 @@ sudo cp /opt/config/default.conf /etc/nginx/conf.d/default.conf
 
 #setup dirs for rails App
 sudo mkdir -p /opt/app
-sudo mkdir -p /opt/app/log
 sudo chown -R vagrant:vagrant /opt/app
 
 #clone the git repo to run latest version of App
 git clone https://github.com/railstutorial/sample_app.git /opt/app
+
+#create logdir, now that clone has completed
+sudo mkdir -p /opt/app/log
+sudo chown -R vagrant:vagrant /opt/app
 
 #set unicorn conf
 sudo cp /opt/config/unicorn.rb /opt/app/config/
@@ -61,6 +62,10 @@ sudo mkdir -p /var/log/supervisor
 #put init script in place
 sudo cp /opt/config/supervisord.init /etc/init.d/supervisord
 sudo chmod +x /etc/init.d/supervisord
+
+
+#create wrapper for supervisord script
+rvm alias create sample_app ruby-1.9.3-p551@sample_app
 
 #start supervisord and make sure supervisord and nginx start at boot
 sudo service supervisord restart

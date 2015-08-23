@@ -72,7 +72,4 @@ sudo service supervisord restart
 sudo chkconfig supervisord on
 sudo chkconfig nginx on
 
-#fix vboxadd after kernel updates so the shares will mount on vagrant reload
-sudo /etc/init.d/vboxadd setup
-
 

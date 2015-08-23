@@ -14,7 +14,7 @@ sudo yum install -y nodejs curl-devel nano sqlite-devel libyaml-devel nginx git 
 
 ##Install rvm for ruby, gem versioning
 gpg --keyserver hkp://keys.gnupg.net --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3
-curl -sSL https://get.rvm.io | bash -s stable --ruby --gems=rails,unicorn
+curl -sSL https://get.rvm.io | bash -s stable --ruby
 source ~/.profile
 
 #install the correct ruby version and set it to default
@@ -30,7 +30,8 @@ sudo cp /opt/config/default.conf /etc/nginx/conf.d/default.conf
 
 #setup dirs for rails App
 sudo mkdir -p /opt/app
-sudo chown vagrant:vagrant /opt/app
+sudo mkdir -p /opt/app/log
+sudo chown -R vagrant:vagrant /opt/app
 
 #clone the git repo to run latest version of App
 git clone https://github.com/railstutorial/sample_app.git /opt/app
@@ -61,8 +62,12 @@ sudo mkdir -p /var/log/supervisor
 sudo cp /opt/config/supervisord.init /etc/init.d/supervisord
 sudo chmod +x /etc/init.d/supervisord
 
-#make sure supervisord and nginx start at boot
+#start supervisord and make sure supervisord and nginx start at boot
+sudo service supervisord start
 sudo chkconfig supervisord on
 sudo chkconfig nginx on
+
+#fix vboxadd after kernel updates so the shares will mount on vagrant reload
+sudo /etc/init.d/vboxadd setup
 
 

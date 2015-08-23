@@ -40,7 +40,7 @@ git clone https://github.com/railstutorial/sample_app.git /opt/app
 sudo cp /opt/config/unicorn.rb /opt/app/config/
 
 #setup rails app
-cd /opt/app && bundle install && rake db:merge && gem install unicorn
+cd /opt/app && bundle install && rake db:migrate && gem install unicorn
 
 #start unicorn and ngnix
 cd /opt/app && unicorn_rails -c config/unicorn.rb -D

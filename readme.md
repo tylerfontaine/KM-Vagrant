@@ -1,1 +1,1 @@
-This is a complete environment with ruby on rails, unicorn, nginx.
+This is a complete environment with ruby on rails, unicorn, nginx, and supervisord.

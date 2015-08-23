@@ -6,7 +6,7 @@ Vagrant.configure(2) do |config|
 
   config.vm.synced_folder "config/", "/opt/config"
 
-  config.vm.provision "shell", path: "prov.sh"
+  config.vm.provision "shell", path: "prov.sh", privileged: false
 
 ###VB CONFIG
   config.vm.provider "virtualbox" do |vb|
